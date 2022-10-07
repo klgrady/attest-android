@@ -36,6 +36,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.snackbar.Snackbar
+import com.amazonaws.mobileconnectors.kinesis.kinesisrecorder.*;
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.regions.Regions;
+
 
 private const val TAG = "MainActivity"
 private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
@@ -287,6 +291,21 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         outputTextView.text = outputWithPreviousLogs
     }
 
+//    suspend fun reportLocationToLambda(location: String) {
+//        val json = """{"user":"gkerrile", "location":"$location"}"""
+//        val byteArray = json.trimIndent().encodeToByteArray()
+//        val request = InvokeRequest {
+//            functionName = "attestSendContactNotice"
+//            logType = LogType.Tail
+//            payload = byteArray
+//        }
+//
+//        LambdaClient { region = "us-east-1"}.use {awsLambda ->
+//            val res = awsLambda.invoke(request)
+//            println("just sent location to lambda")
+//        }
+//    }
+
     /**
      * Receiver for location broadcasts from [ForegroundOnlyLocationService].
      */
@@ -299,6 +318,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
             if (location != null) {
                 logResultsToScreen("Foreground location: ${location.toText()}")
+//                GlobalScope.async {reportLocationToLambda(location.toText())}
             }
         }
     }

@@ -15,6 +15,7 @@
  */
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     // TODO: Step 2.1, Target Android 10 and then Android 11.
@@ -57,4 +58,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:19.0.1'
 
     implementation 'com.google.android.material:material:1.5.0'
+
+    implementation 'com.amazonaws:aws-android-sdk-kinesis:2.54.0'
+    implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.54.0'
 }
